@@ -27,15 +27,17 @@ dragula([$('media-table'), $('playlist-list')], {
 	}
 })
 	.on('drop', function(el, target, source) {
-		var text = '';
-		var li = document.createElement('li');
-		for (var i = 0; i < el.children.length; i ++) {
-			(text == '') ? 
-				(text = text + el.children[i].innerHTML)
-				: (text = text + ', ' + el.children[i].innerHTML);
+		if (source === $('media-table')) {
+			var text = '';
+			var li = document.createElement('li');
+			for (var i = 0; i < el.children.length; i ++) {
+				(text == '') ? 
+					(text = text + el.children[i].innerHTML)
+					: (text = text + ', ' + el.children[i].innerHTML);
+			}
+			li.insertAdjacentHTML('beforeend', text);
+			el.parentNode.replaceChild(li, el);
 		}
-		li.insertAdjacentHTML('beforeend', text);
-		el.parentNode.replaceChild(li, el);
 	});
 
 function $(id) {
