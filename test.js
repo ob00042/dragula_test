@@ -18,6 +18,26 @@ dragula([$('table-1'), $('table-2')], {
 	}
 });
 
+dragula([$('media-table'), $('playlist-list')], {
+	copy: function(el, source) {
+		return source === $('media-table');
+	},
+	accepts: function(el, target) {
+		return target !== $('media-table');
+	}
+})
+	.on('drop', function(el, target, source) {
+		var text = '';
+		var li = document.createElement('li');
+		for (var i = 0; i < el.children.length; i ++) {
+			(text == '') ? 
+				(text = text + el.children[i].innerHTML)
+				: (text = text + ', ' + el.children[i].innerHTML);
+		}
+		li.insertAdjacentHTML('beforeend', text);
+		el.parentNode.replaceChild(li, el);
+	});
+
 function $(id) {
 	return document.getElementById(id);
 }
