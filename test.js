@@ -9,6 +9,15 @@ dragula([$('div-1'), $('div-2')], {
 	}
 });
 
+dragula([$('table-1'), $('table-2')], {
+	copy: function(el, source) {
+		return source === $('table-1');
+	},
+	accepts: function(el, target) {
+		return target !== $('table-1');
+	}
+});
+
 function $(id) {
 	return document.getElementById(id);
 }
